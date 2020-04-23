@@ -9,8 +9,9 @@ import 'package:flutter_google_cast_button/flutter_google_cast_button.dart';
 class CastButtonWidget extends StatefulWidget {
   final MediaRouteBloc bloc;
   final Color tintColor;
+  final Color backgroundColor;
 
-  CastButtonWidget({this.bloc, this.tintColor});
+  CastButtonWidget({this.bloc, this.tintColor, this.backgroundColor});
 
   @override
   State<StatefulWidget> createState() => _CastButtonWidgetState();
@@ -102,8 +103,9 @@ class _CastButtonWidgetState extends State<CastButtonWidget>
           );
         }
         currentState = newState;
-        return IconButton(
-          icon: icon,
+        return FloatingActionButton(
+          child: icon,
+          backgroundColor: widget.backgroundColor,
           onPressed: () => FlutterGoogleCastButton.showCastDialog(),
         );
       },

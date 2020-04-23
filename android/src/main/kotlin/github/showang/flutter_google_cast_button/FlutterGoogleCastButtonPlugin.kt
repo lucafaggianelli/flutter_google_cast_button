@@ -6,6 +6,10 @@ import androidx.mediarouter.app.MediaRouteControllerDialog
 import com.google.android.gms.cast.framework.CastContext
 import com.google.android.gms.cast.framework.CastState
 import com.google.android.gms.cast.framework.CastStateListener
+import com.google.android.gms.cast.MediaInfo
+import com.google.android.gms.cast.MediaLoadRequestData
+import com.google.android.gms.cast.RemoteMediaPlayer
+import com.google.android.gms.cast.framework.media.RemoteMediaClient
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -57,6 +61,7 @@ class FlutterGoogleCastButtonPlugin(private val registrar: Registrar, private va
 
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
+            "loadMedia" -> loadMedia(call.argument("url")!!)
             "showCastDialog" -> showCastDialog()
             else -> result.notImplemented()
         }
@@ -75,6 +80,22 @@ class FlutterGoogleCastButtonPlugin(private val registrar: Registrar, private va
                 }
             }
         }
+    }
+
+    private fun loadMedia(url: String) {
+        val mediaInfo: MediaInfo = MediaInfo.Builder(url)
+            .setStreamType(MediaInfo.STREAM_TYPE_BUFFERED)
+            // .setContentType("videos/mp4")
+            // .setMetadata(movieMetadata)
+            // .setStreamDuration(mSelectedMedia.getDuration() * 1000)
+            .build()
+
+        val remoteMediaClient: RemoteMediaClient = castContext?.sessionManager?.currentCastSession!!.remoteMediaClient
+        val mediaRequest: MediaLoadRequestData = MediaLoadRequestData.Builder()
+            .setMediaInfo(mediaInfo)
+            .build()
+
+        remoteMediaClient.load(mediaRequest)
     }
 }
 

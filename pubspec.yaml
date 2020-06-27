@@ -10,8 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^3.0.0
-  flutter_bloc: ^3.1.0
+  bloc: ^4.0.0
+  flutter_bloc: ^4.0.0
   equatable: ^1.0.2
 
 dev_dependencies:
@@ -35,7 +35,6 @@ flutter:
     - images/ic_cast0_black_24dp.png
     - images/ic_cast1_black_24dp.png
     - images/ic_cast2_black_24dp.png
-
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
   #  - images/a_dot_burr.jpeg
@@ -46,7 +45,6 @@ flutter:
   #
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
-
   # To add custom fonts to your plugin package, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
